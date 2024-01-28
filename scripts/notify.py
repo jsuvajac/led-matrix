@@ -85,8 +85,11 @@ if __name__ == '__main__':
     import os
     import sys
 
-    pid = os.fork()
     length = 3 if len(sys.argv) != 2 else int(sys.argv[1])
 
-    if pid == 0:
+    if sys.platform == "win32":
         notify(length)
+    else:
+        pid = os.fork()
+        if pid == 0:
+            notify(length)
